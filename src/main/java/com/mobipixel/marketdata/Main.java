@@ -22,7 +22,6 @@ public class Main {
         log.info("MobiPixel - MarketData System has activated.");
 
         SpringApplication.run(Main.class, args);
-
     }
 
 }
