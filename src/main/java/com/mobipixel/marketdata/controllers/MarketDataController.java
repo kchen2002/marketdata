@@ -2,8 +2,10 @@ package com.mobipixel.marketdata.controllers;
 
 import com.google.gson.JsonElement;
 import com.mobipixel.marketdata.entities.RuleResult;
+import com.mobipixel.marketdata.services.JobScheduleService;
 import com.mobipixel.marketdata.services.PortfolioService;
 import com.mobipixel.marketdata.services.QuandlDataService;
+import com.mobipixel.marketdata.services.impl.JobScheduleServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,9 @@ public class MarketDataController {
 
     @Autowired
     PortfolioService portfolioService;
+
+    @Autowired
+    JobScheduleService jobScheduleService;
 
     @RequestMapping(value="/ticker/{ticker}",produces = { MediaType.APPLICATION_JSON_VALUE })
     @ResponseBody

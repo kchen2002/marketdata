@@ -4,7 +4,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.mobipixel.marketdata.entities.Rule;
 import com.mobipixel.marketdata.entities.RuleResult;
-import com.mobipixel.marketdata.entities.impl.TickerRuleImpl;
+import com.mobipixel.marketdata.entities.impl.TargetPriceRuleImpl;
 import com.mobipixel.marketdata.services.PortfolioService;
 import com.mobipixel.marketdata.services.QuandlDataService;
 import org.slf4j.Logger;
@@ -31,8 +31,8 @@ public class PortfolioServiceImpl implements PortfolioService{
 
     public RuleResult runRule(Rule r) {
         RuleResult rs = null;
-        if (r instanceof TickerRuleImpl) {
-            TickerRuleImpl stockRule = (TickerRuleImpl) r;
+        if (r instanceof TargetPriceRuleImpl) {
+            TargetPriceRuleImpl stockRule = (TargetPriceRuleImpl) r;
             JsonElement json = quandl.requestTicker(stockRule.getSymbol());
 
             JsonArray dataset = json.getAsJsonObject().get("data").getAsJsonArray().get(0).getAsJsonArray();
@@ -48,7 +48,7 @@ public class PortfolioServiceImpl implements PortfolioService{
                 log.error("Error parsing date from ticker data");
             }
 
-            rs = ((TickerRuleImpl) r).runRule(price, date);
+            rs = ((TargetPriceRuleImpl) r).runRule(price, date);
         }
 
         return rs;
@@ -57,14 +57,15 @@ public class PortfolioServiceImpl implements PortfolioService{
     public List<RuleResult> runPortfolioRules(String id) {
 
         List<RuleResult> results = new ArrayList<>();
-        TickerRuleImpl stockRule = new TickerRuleImpl("INO", 15.00);
+        TargetPriceRuleImpl stockRule = new TargetPriceRuleImpl("INO", 15.00);
 
 
         results.add(this.runRule(stockRule));
-        results.add(this.runRule(new TickerRuleImpl("AAPL", 98.00)));
-        results.add(this.runRule(new TickerRuleImpl("GILD", 120.00)));
-        results.add(this.runRule(new TickerRuleImpl("IBM", 160.00)));
+        results.add(this.runRule(new TargetPriceRuleImpl("AAPL", 98.00)));
+        results.add(this.runRule(new TargetPriceRuleImpl("GILD", 120.00)));
+        results.add(this.runRule(new TargetPriceRuleImpl("IBM", 160.00)));
 
+        log.info("Portfolio run...");
         return results;
     }
 }

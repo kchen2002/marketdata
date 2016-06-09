@@ -5,6 +5,7 @@ package com.mobipixel.marketdata.entities;
  */
 public interface RuleResult {
     boolean getResult();
+    void setResult(boolean result);
 
     String getDescription();
     void setDescription(String description);

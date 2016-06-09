@@ -7,15 +7,15 @@ import java.util.Date;
 /**
  * Created by Kevin on 5/29/16.
  */
-public class TickerRuleResult implements RuleResult {
+public class TargetPriceRuleResultImpl implements RuleResult {
     private String description;
     private boolean result;
 
-    private TickerRuleImpl rule;
+    private TargetPriceRuleImpl rule;
     private Double price;
     private Date date;
 
-    public TickerRuleResult(TickerRuleImpl rule, Date date) {
+    public TargetPriceRuleResultImpl(TargetPriceRuleImpl rule, Date date) {
         this.rule = rule;
         this.date = date;
     }
@@ -36,7 +36,7 @@ public class TickerRuleResult implements RuleResult {
         this.description = description;
     }
 
-    public TickerRuleImpl getRule() {
+    public TargetPriceRuleImpl getRule() {
         return this.rule;
     }
 
