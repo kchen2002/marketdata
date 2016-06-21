@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.mobipixel.marketdata.entities.Rule;
 import com.mobipixel.marketdata.entities.RuleResult;
 import com.mobipixel.marketdata.entities.impl.TargetPriceRuleImpl;
+import com.mobipixel.marketdata.services.PersistenceService;
 import com.mobipixel.marketdata.services.PortfolioService;
 import com.mobipixel.marketdata.services.QuandlDataService;
 import org.slf4j.Logger;
@@ -28,6 +29,9 @@ public class PortfolioServiceImpl implements PortfolioService{
 
     @Autowired
     QuandlDataService quandl;
+
+    @Autowired
+    PersistenceService db;
 
     public RuleResult runRule(Rule r) {
         RuleResult rs = null;
